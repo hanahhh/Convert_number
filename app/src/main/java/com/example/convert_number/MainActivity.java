@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     private CategoryAdapter categoryAdapter;
     private EditText number;
     private TextView result;
+    private String s1 = "Convert";
+    private String s2 = "Convert";
+    private int dec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,27 @@ public class MainActivity extends AppCompatActivity {
         spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, categoryAdapter.getItem(i).getName(), Toast.LENGTH_SHORT).show();
+                s1 = categoryAdapter.getItem(i).getName();
+
+                if(s1.equals("Binary")) {
+                    dec = Integer.parseInt(number.getText().toString(), 2);
+                } else if (s1.equals("Octal")) {
+                    dec = Integer.parseInt(number.getText().toString(), 8);
+                } else if (s1.equals("Decimal")) {
+                    dec = Integer.parseInt(number.getText().toString());
+                } else if (s1.equals("Hexadecimal")) {
+                    dec = Integer.parseInt(number.getText().toString(), 16);
+                }
+
+                if(s2.equals("Binary")) {
+                    result.setText(Integer.toBinaryString(dec));
+                } else if (s2.equals("Octal")) {
+                    result.setText(Integer.toOctalString(dec));
+                } else if (s2.equals("Decimal")) {
+                    result.setText(Integer.toString(dec));
+                } else if (s2.equals("Hexadecimal")) {
+                    result.setText(Integer.toHexString(dec));
+                }
             }
 
             @Override
@@ -47,16 +70,25 @@ public class MainActivity extends AppCompatActivity {
         spinnerCategoryConvert.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                int dec = Integer.parseInt(number.getText().toString());
-                String s = categoryAdapter.getItem(i).getName();
-                Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
-                if(s.equals("Binary")) {
+                if(s1.equals("Binary")) {
+                    dec = Integer.parseInt(number.getText().toString(), 2);
+                } else if (s1.equals("Octal")) {
+                    dec = Integer.parseInt(number.getText().toString(), 8);
+                } else if (s1.equals("Decimal")) {
+                    dec = Integer.parseInt(number.getText().toString());
+                } else if (s1.equals("Hexadecimal")) {
+                    dec = Integer.parseInt(number.getText().toString(), 16);
+                }
+
+                s2 = categoryAdapter.getItem(i).getName();
+
+                if(s2.equals("Binary")) {
                     result.setText(Integer.toBinaryString(dec));
-                } else if (s.equals("Octal")) {
+                } else if (s2.equals("Octal")) {
                     result.setText(Integer.toOctalString(dec));
-                } else if (s.equals("Decimal")) {
+                } else if (s2.equals("Decimal")) {
                     result.setText(Integer.toString(dec));
-                } else if (s.equals("Hexadecimal")) {
+                } else if (s2.equals("Hexadecimal")) {
                     result.setText(Integer.toHexString(dec));
                 }
             }
@@ -70,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Category> getListCategory() {
         List<Category> list = new ArrayList<>();
+        list.add(new Category("Convert"));
         list.add(new Category("Binary"));
         list.add(new Category("Octal"));
         list.add(new Category("Decimal"));

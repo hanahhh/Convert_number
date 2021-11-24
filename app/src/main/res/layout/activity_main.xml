@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberSigned"
         android:text="0"
+        android:digits="0123456789abcdefABCDEF"
         android:hint="number"
         android:textSize="15dp"
         android:layout_margin="10dp" />
